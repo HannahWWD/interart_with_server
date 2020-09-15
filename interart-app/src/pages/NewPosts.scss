@@ -1,0 +1,66 @@
+@import '../components/base.scss';
+
+
+
+.new-post{
+    margin-top: 4em;
+    display:grid;
+    grid-template-columns: 3fr 2fr;
+    column-gap: 4em;
+    .image-input{
+        background-color: $secondary-bg;
+        width:100%;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px dashed $secondary-color;
+        img{
+            width:100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        button{
+            height:90px;
+            width:90px;
+            font-size: 60px;
+            line-height: 1;
+            background-color: $secondary-color;
+            border: none;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+}
+
+    }
+
+    .form-control{
+        background: $light-bg;
+        outline: none;
+        border: none;
+        color:$primary-text;
+
+    }
+
+    textarea{
+        resize: none;
+    }
+
+    .counter{
+        color:$secondary-color;
+        text-align: right;
+    }
+
+    .btn-big{
+        background: $primary-color;
+        border: none;
+        font-size: 16px;
+        color:$secondary-bg;
+
+    }
+
+
+
+}

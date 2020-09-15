@@ -1,0 +1,36 @@
+@import '../components/base.scss';
+
+
+.collection-head{
+    display:grid;
+    grid-template-columns: 3fr 2fr;
+    column-gap: 3em;
+    align-items: flex-end;
+    h2{
+        color:$primary-text;
+        line-height: 2;
+    }
+}
+
+.collection-feature-container{
+    margin:3em 0;
+   
+    div{
+        margin-top: 1.5em;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        column-gap: 2em;
+        
+    }
+    
+
+}
+
+.all-collection{
+    .card-columns{
+        column-count: 3;
+    }
+
+}
+
+

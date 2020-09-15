@@ -1,0 +1,58 @@
+@import './base.scss';
+
+.sidebar{
+    display:grid;
+    grid-template-rows:1fr 5fr;
+    background:$secondary-bg;
+    width:153px;
+    height:100vh;
+    position: fixed;
+    box-sizing: border-box;
+    padding:5em 0 8em 0;
+    justify-content: center;
+    & > div{
+        &:first-child{
+            display:block;
+            
+        }
+    }
+}
+
+.menu-container{
+    display:grid;
+    grid-template-rows: repeat(4,auto);
+    justify-content: center;
+    align-items: center;
+    & > div{
+        text-align: center;
+        
+        div{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            background-color:$primary-bg;
+            width:74px;
+            height:74px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+}
+        
+    }
+    svg path{
+        fill:$secondary-text;
+    }
+    
+ 
+}
+
+.active-tab{
+    svg path{
+        fill:$secondary-color;
+    }
+    p{
+        color:$secondary-color;
+    }
+}

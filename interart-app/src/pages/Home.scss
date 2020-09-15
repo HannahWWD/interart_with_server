@@ -1,0 +1,66 @@
+@import '../components/base.scss';
+
+.home{
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 2em;
+
+
+}
+
+
+
+
+.feature-card-container > div{
+    &:first-child {
+        display:flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 1.2em;
+        button{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+
+           width:30px;
+           height:30px;
+           background: $secondary-color;
+           border:none;
+           border-radius: 30px;
+           -webkit-border-radius: 30px;
+           -moz-border-radius: 30px;
+           -ms-border-radius: 30px;
+           -o-border-radius: 30px;
+}
+        h3{
+            color:$secondary-text;
+            margin:0;
+        }
+            
+    }
+}
+
+
+
+.search-bar{
+    display:flex;
+    margin-top: calc(30px + 1.2em);
+    background: $light-bg;
+    padding:1em;
+    input{
+        border: none;
+        width:100%;
+        background: none;
+        line-height: 1;
+        font-size: 1.125em;
+        padding-left: 1em;
+        outline:none;
+
+}
+}
+
+.card-columns{
+    margin-top: 3em;
+    display:inline-block;
+    column-count: 2;
+}

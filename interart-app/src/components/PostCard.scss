@@ -1,0 +1,55 @@
+@import './base.scss';
+
+
+.post-card{
+    background-color: $secondary-bg;
+    position: relative;
+    &>img{
+        width:100%;
+    }
+    .post-info-short{
+        padding:2em 1em;
+        display: flex;
+        justify-content: space-between;
+        h3{
+            padding-bottom: 0.3em;
+        }
+        p{
+            padding-bottom: 1em;
+        }
+
+    }
+    .post-description{
+        padding:0 1em 2em 1em;
+        text-align: justify;
+    }
+
+    .react-post{
+        display:grid;
+        border-top: 1px solid $light-bg;
+        padding:1em;
+        grid-template-columns: repeat(3,1fr);
+        div{
+            margin:0 auto;
+            span{
+                padding-left:0.5em;
+            }
+        }
+    }
+
+}
+
+.archive-post-card{
+    &>img{
+        width:100%;
+        height:300px;
+        object-fit: cover;
+    }
+    .react-post{
+        display:none;
+    }
+
+    svg{
+        display: none;
+    }
+}

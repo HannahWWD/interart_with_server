@@ -1,0 +1,31 @@
+@import './base.scss';
+
+.card-customized{
+    margin-bottom: 1em;
+    padding:10px;
+    display:grid;
+    grid-template-columns: 10vw 1fr;
+    background: $secondary-bg;
+    width:100%;
+    min-height:10vw;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+
+    .card-img{
+        height:10vw;
+        object-fit: cover;
+    }
+
+    .right{
+        padding-left:10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+   
+
+}
