@@ -3,11 +3,15 @@
 .home{
     display:grid;
     grid-template-columns: 1fr 2fr;
-    column-gap: 2em;
+    column-gap: 1.25rem;
 
 
 }
 
+// .feature-card-container{
+//     position: fixed;
+//     width:calc((100vw - 153px - 6em - 2 * 1.25rem) / 3)
+// }
 
 
 
@@ -63,4 +67,7 @@
     margin-top: 3em;
     display:inline-block;
     column-count: 2;
+    .card{
+        margin-bottom: 1.25rem;
+    }
 }

@@ -38,26 +38,39 @@ function App(){
   }, []);
 
   const [tab, setTab] = useState("featured");
+
+ 
   const getTabName = (tabName) => {
-    setTab(tabName)    
+    setTab(tabName)
   }
 
+  // maintain state after page reload
+  useEffect(() => {
+    setTab(localStorage.getItem('tabName')||
+    "featured")
+    }, [])
+
+  useEffect(() => {
+    localStorage.setItem("tabName", tab)
+  }, [tab])
+
+  // console.log(tab)
 
 
   return (
     <div className="App">
      
       <BrowserRouter>
-        <Sidebar getTabName={getTabName}/>
+        <Sidebar getTabName={getTabName} activeTab={tab}/>
         <Navbar />
         <ResetScroll />
        
         <Route exact path="/" render={()=>(<Home data={data[tab]} tab={tab} />)}/> 
-        <Route path="/article" component={Article}/> 
+        <Route path="/article/:id" component={Article}/> 
         <Route path="/all" component={All}/>
         <Route path="/new-post" component={NewPost}/>
         <Route path="/archive" component={MyArchive}/>
-        <Route path="/collection" component={Collection}/>
+        <Route path="/collection/:name" render={(props)=>(<Collection data={data[tab]} browserProps={props}/>)}/> 
         <Route path="/my-posts" component={MyPosts}/>
       
 

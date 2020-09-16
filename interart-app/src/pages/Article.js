@@ -1,25 +1,57 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import './Article.scss'
 import Avatar from '../components/Avatar'
 import Tag from '../components/Tag'
 import FeatureCard from '../components/FeatureCard'
+import { Link } from 'react-router-dom'
 
-export default function Article() {
+export default function Article(props) {
+
+    const [match, setMatch] = useState(null)
+
+    useEffect(()=>{
+        const postData = async (data) => {
+            const response = await fetch("http://localhost:5000/api/get-article", {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data), // body data type must match "Content-Type" header        
+            });
+        
+            try {
+                const matchedFromSev = await response.json();
+                setMatch(matchedFromSev[0]);
+                return matchedFromSev
+            } catch (error) {
+                console.log("error", error);
+                // appropriately handle the error
+            }
+        }
+
+        postData(props.match.params);
+        
+    },[props.match.params])
+    console.log(match)
 
 
     return (
         <div className="main-container">
             <article className="article">
                 <div>
-                    <Avatar />
+                    <Avatar 
+                        avatar={match && match.avatar}
+                        author={match && match.author}
+                        />
                     <button type="button" className="btn-small small-text">Follow</button>
                 </div>
                 <div className="article-info">
                 <div>
-                    <h2>Flower</h2>
-                    <p>teamlab / human and nature</p>
-                    <Tag tag="light" />
-                    <Tag tag="broadless" />
+                    <h2>{match && match.title}</h2>
+                    <p>{`${match && match.designer} / ${match && match.topic}`}</p>
+                    {match && match.tags.map(tag=><Tag tag={tag} key={Math.random()} />)
+                   } 
                 </div>
 
                 {/* social group */}
@@ -47,18 +79,20 @@ export default function Article() {
 
                 </div>
 
-                <img src="https://images.unsplash.com/photo-1565841424346-c2bf899b27bb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0" className="img-fluid" alt="art"></img>
+                <img src={match && match.image.regular} className="img-fluid" alt="art"></img>
 
                 <h3>description</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel culpa laborum eveniet nulla, impedit perferendis. Voluptas laudantium accusamus laboriosam veniam eveniet velit, magni mollitia sequi, corrupti hic impedit ullam sit?</p>
+                <p>{match && match.description}</p>
 
                 {/* closed icon */}
+                <Link to="/">
                 <div className="closed">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M0 2.90437L9.84652 12.7509L0 22.5974L2.90437 25.5372L12.7509 15.6907L22.5974 25.5372L25.5372 22.5974L15.6907 12.7509L25.5372 2.90437L22.5974 0L12.7509 9.84652L2.90437 0L0 2.90437Z" fill="#BDBDBD" />
                     </svg>
 
                 </div>
+                </Link>
                 
 
 
@@ -66,7 +100,10 @@ export default function Article() {
 
             <div className="comment-related">
                 <div>
-                    <Avatar />
+                    <Avatar 
+                        avatar={require('../images/avatar.jpg')}
+                        author={"Angela Mollyson"}
+                    />
                     <div className="my-comment">
                         <textarea id="myComment" name="myComment" rows="4" placeholder="Share your thoughts about this post..."></textarea>
                         <div>

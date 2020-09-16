@@ -3,6 +3,7 @@ import './Home.scss'
 import FeatureCard from '../components/FeatureCard'
 import PostCard from '../components/PostCard'
 import { LoremIpsum } from "lorem-ipsum";
+import CollectionCard from '../components/CollectionCard';
 
 function Home(props){
 
@@ -27,20 +28,26 @@ function Home(props){
                 designer: item.designer,
                 topic: item.topic,
                 description: item.description,
-                cover:item.image.thumb}
+                cover:item.image.thumb,
+                id:item.id
+            }
+            
             renderSource.push(itemObj)
         };
     }
 
     if(props.tab === "designers" || props.tab === "topics"){
         for(const key of Object.keys(props.data)){
+            let covers = [];
+            props.data[key].map(item=>covers.push(item.image.thumb))
             if(key !== "unknown" && renderSource.length<4){
                 const itemObj = {
                     title:key,
                     designer:null,
                     topic:null,
                     description:lorem.generateParagraphs(1),
-                    cover:props.data[key][0].image.thumb
+                    cover:covers.slice(0,4),
+                    id:key
                 }
                 renderSource.push(itemObj)
             }
@@ -48,11 +55,11 @@ function Home(props){
         }
     }
 
-
     return(
         <div className="main-container home">
 
             <div className="feature-card-container">
+                
                 <div>
                     <div><h3>Posts Pick For You</h3></div>
                     <button type="button">
@@ -63,7 +70,7 @@ function Home(props){
                     </button>
                 </div>
                 
-            {renderSource.map(item=>(
+            {props.tab ==="featured" ? renderSource.map(item=>(
                 <FeatureCard
                     key = {Math.random()}
                     cover={item.cover}
@@ -71,10 +78,24 @@ function Home(props){
                     designer={item.designer}
                     topic={item.topic}
                     description={item.description}
+                    id={item.id}
                     
-                />
+                />)) : renderSource.map(item=>(
+                <CollectionCard
+                    key = {Math.random()}
+                    cover={item.cover}
+                    title={item.title}
+                    designer={item.designer}
+                    topic={item.topic}
+                    description={item.description}
+                    id={item.id}
+                    />
 
-            ))}
+
+                ))
+
+
+            }
                 
                 
 

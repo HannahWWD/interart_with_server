@@ -88,7 +88,7 @@ const collectionsAPI = {
 
 
 for(let item of mockAPI){
-  // designers
+  //designers
   let designer = item.designer;
   if(!collectionsAPI.designers[designer]){
     collectionsAPI.designers[designer] = [item]
@@ -96,15 +96,15 @@ for(let item of mockAPI){
     collectionsAPI.designers[designer].push(item)
   }
 
-  let topic = item.topic;
-  if(!collectionsAPI.topics[topic]){
-    collectionsAPI.topics[topic] = [item]
-  }else{
-    collectionsAPI.topics[topic].push(item)
-  }
+  // let topic = item.topic;
+  // if(!collectionsAPI.topics[topic]){
+  //   collectionsAPI.topics[topic] = [item]
+  // }else{
+  //   collectionsAPI.topics[topic].push(item)
+  // }
 
-  const shuffledMock = mockAPI.sort(()=> 0.5 - Math.random());
-  collectionsAPI.featured = shuffledMock.slice(0,7)
+  // const shuffledMock = mockAPI.sort(()=> 0.5 - Math.random());
+  // collectionsAPI.featured = shuffledMock.slice(0,7)
 
   
 
@@ -113,4 +113,4 @@ for(let item of mockAPI){
 
 //console.log(collectionsAPI)
 
-fs.writeFileSync('collection.json',JSON.stringify(collectionsAPI))
+fs.writeFileSync('collection1.json',JSON.stringify(collectionsAPI))

@@ -1,5 +1,9 @@
 @import '../components/base.scss';
 
+.collection-closed{
+    display:flex;
+    justify-content: flex-end;
+}
 
 .collection-head{
     display:grid;

@@ -1,17 +1,52 @@
 import React from 'react';
 import './Collection.scss';
 import PostCard from '../components/PostCard';
-import { Link } from 'react-router-dom';
+import {LoremIpsum} from 'lorem-ipsum';
+import {Link} from 'react-router-dom'
 
 
 
 export default function Collection(props) {
+
+const matchedName = props.browserProps.match.params.name
+
+//    if(props.data){
+//        var matchedName = Object.keys(props.data).filter(
+//            item=>{
+//                return item === props.browserProps.match.params.name}
+//         )
+//         matchedName = matchedName[0]
+//         console.log(matchedName)
+    
+//    }
+
+const lorem = new LoremIpsum({
+    sentencesPerParagraph: {
+      max: 4,
+      min: 2
+    },
+    wordsPerSentence: {
+      max: 16,
+      min: 4
+    }
+  });
+
+
     return (
         <div className="main-container">
+        {/* closed icon */}
+        <Link to="/">
+                <div className="collection-closed">
+                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M0 2.90437L9.84652 12.7509L0 22.5974L2.90437 25.5372L12.7509 15.6907L22.5974 25.5372L25.5372 22.5974L15.6907 12.7509L25.5372 2.90437L22.5974 0L12.7509 9.84652L2.90437 0L0 2.90437Z" fill="#BDBDBD" />
+                    </svg>
+
+                </div>
+                </Link>
             <div className="collection-head">
                 <div>
-                    <h2>The TeamLab Collection</h2>
-                    <p className="small-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid iure voluptates incidunt fugit quia obcaecati nobis at totam amet maxime, impedit blanditiis distinctio reiciendis corrupti saepe? Ratione facere aspernatur necessitatibus?</p>
+                    <h2>{matchedName} Collection</h2>
+                    <p className="small-text">{lorem.generateParagraphs(1)}</p>
                 </div>
 
                 <form className="search-bar">
@@ -26,66 +61,39 @@ export default function Collection(props) {
             <div className="collection-feature-container">
                 <h2>featured projects</h2>
                 <div>
-                    <Link to="#"><div className="square" style={{backgroundImage:"url('https://images.unsplash.com/photo-1593072188319-5006e116315e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0')"}}>
+
+                    {props.data && props.data[matchedName].slice(0,4).map(item=>{
+                        const image = item.image.small;
+                        
+                        return <div key={Math.random()} className="square" style={{backgroundImage:`url(${image})`}}>
                     </div>
-                    </Link>
-                    <Link to="#"><div className="square" style={{backgroundImage:"url('https://images.unsplash.com/photo-1593072188319-5006e116315e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0')"}}>
-                    </div>
-                    </Link>
-                    <Link to="#"><div className="square" style={{backgroundImage:"url('https://images.unsplash.com/photo-1593072188319-5006e116315e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0')"}}>
-                    </div>
-                    </Link>
-                    <Link to="#"><div className="square" style={{backgroundImage:"url('https://images.unsplash.com/photo-1593072188319-5006e116315e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0')"}}>
-                    </div>
-                    </Link>
+                    
+                    })}
                     
                 </div>
                     
             </div>
 
             <div className="all-collection">
-            <h2>All About TeamLab</h2>
+            <h2>All About {matchedName}</h2>
             <div className="card-columns">
-                    <PostCard 
-                        postImg="https://images.unsplash.com/photo-1593072188319-5006e116315e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
-                      <PostCard 
-                        postImg="https://images.unsplash.com/photo-1505299344687-ee45ad431f9b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
-                      <PostCard 
-                        postImg="https://images.unsplash.com/photo-1583075347180-4bcc34aab3af?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
-                      <PostCard 
-                        postImg="https://images.unsplash.com/photo-1584815012715-25cd6e05a3f2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
-                    <PostCard 
-                        postImg="https://images.unsplash.com/photo-1584815012715-25cd6e05a3f2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
+                    {props.data && props.data[matchedName].map(
+                        item => (<PostCard 
+                        key = {Math.random()}
+                        postImg= {item.image.small}
+                        title = {item.title}
+                        designer={item.designer}
+                        topic = {item.topic}
+                        numLikes={item.likes}
+                        numComments={Math.floor(item.likes * Math.random())}
+                        author={item.author}
+                        avatar={item.avatar}
+                        tags={item.tags}
+                        />
+                        )
+                       
+                    )}
+                    
                 </div>
                 </div>
 

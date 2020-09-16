@@ -7,7 +7,7 @@ function PostCard(props) {
 
     return (
         <div className={props.type ==="archive"? "card post-card archive-post-card":"card post-card"}>
-            <Avatar />
+            <Avatar author={props.author} avatar={props.avatar}/>
             <img src={props.postImg} alt="background"></img>
             
             <div className="post-info-short">
@@ -15,9 +15,9 @@ function PostCard(props) {
                 <h3>{props.title}</h3>
                 <p>{`${props.designer} / ${props.topic}`}</p>
                 <div id="tags">
-                    <Tag tag="light" />
-                    <Tag tag="Street Art" />
-                    <Tag tag="Pop" />
+                    {props.tags ?
+                    props.tags.map(tag=>(<Tag key={Math.random()} tag={tag}/>))
+                    :<Tag tag={"placeholder"} />}
                 </div>
                 </div>              
               {/* save icon */}

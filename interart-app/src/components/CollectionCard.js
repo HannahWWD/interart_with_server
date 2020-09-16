@@ -1,9 +1,10 @@
 import React from 'react'
 import './FeatureCard.scss'
+import './CollectionCard.scss'
 import { Link } from 'react-router-dom';
 
 
-function FeatureCard(props) {
+function CollectionCard(props) {
     const maxInfo = 30;
     const maxDescription = 60;
     let info = null;
@@ -21,28 +22,29 @@ function FeatureCard(props) {
         description = description.slice(0,maxDescription) + "..."
     }
 
+    while(props.cover.length<4){
+        props.cover.push(props.cover[0])
+    }
+
 
     return (
-        <Link to={"/article/"+props.id}>
-            <div className="card-customized">
-                
+            <Link to={"/collection/"+encodeURI(props.id)}>
+            <div className="card-customized collection-card">
                     <div className="left">
-                        <img src={props.cover} className="card-img" alt="cover"></img>
+                        {props.cover.map(item=>(<img src={item} alt="cover" key={Math.random()}></img>))}
                     </div>
 
                     <div className="right">
-                        <div className="">
+                        <div>
                             <h3 className="card-title">{props.title}</h3>
                             <p>{info}</p>
                             <p className="card-text small-text">{description}</p>
                             
                         </div>
                     </div>
-                    
             </div>
-        </Link>
-
+            </Link>
     )
 }
 
-export default FeatureCard
+export default CollectionCard

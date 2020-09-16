@@ -24,6 +24,15 @@ app.get('/api/collection', (req,res) => {
     console.log('Sent Collection');
 });
 
+app.post('/api/get-article',(req,res)=>{
+  const dataFromApp = req.body;
+  const matchedArticle = mockAPI.filter(item=>{
+    return item.id === dataFromApp.id
+  })
+  res.send(matchedArticle)
+  console.log("send article id:",dataFromApp)
+})
+
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname + '/interart-app/build/index.html'))
 })
