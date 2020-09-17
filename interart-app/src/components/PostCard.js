@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import './PostCard.scss'
 import Tag from './Tag'
 import Avatar from './Avatar'
+import {Link} from 'react-router-dom'
 
-function PostCard(props) {
+const PostCard = forwardRef((props,ref) => {
 
     return (
-        <div className={props.type ==="archive"? "card post-card archive-post-card":"card post-card"}>
+        <div ref={ref} className={props.type !=="archive" ? "card post-card" : "card post-card archive-post-card"}>
             <Avatar author={props.author} avatar={props.avatar}/>
-            <img src={props.postImg} alt="background"></img>
+            <Link to={"/article/" + props.id}>
+                <img src={props.postImg} alt="background"></img>
+            </Link>
             
             <div className="post-info-short">
                 <div className="info-text">
@@ -68,6 +71,8 @@ function PostCard(props) {
             
         </div>
     )
-}
+
+    
+})
 
 export default PostCard

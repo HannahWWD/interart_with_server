@@ -3,10 +3,12 @@ import './Sidebar.scss';
 import { Link,withRouter } from 'react-router-dom';
 
 function Sidebar(props) {
+    
 
 
 
     return (
+        
         <div className="sidebar">
             <div><img src={require('../images/logo-ia.svg')} alt="logo"></img></div>
 
@@ -15,6 +17,7 @@ function Sidebar(props) {
                 <div className={props.activeTab === "featured" ? "menu-icon active-tab":"menu-icon"} onClick={
                     ()=>{
                         props.getTabName("featured");
+                        window.scrollTo(0, 0);
                         // changeActiveTab(0)
                     }}>
                     <Link to="/">
@@ -30,7 +33,8 @@ function Sidebar(props) {
             
                 <div className={props.activeTab === "designers" ? "menu-icon active-tab":"menu-icon"} onClick={
                     ()=>{
-                        props.getTabName('designers')
+                        props.getTabName('designers');
+                        window.scrollTo(0, 0);
                         //changeActiveTab(1)
                     }}>
                     <Link to ="/">
@@ -48,7 +52,8 @@ function Sidebar(props) {
             
                 <div className={props.activeTab === "topics" ? "menu-icon active-tab":"menu-icon"} onClick={
                     ()=>{
-                        props.getTabName('topics')
+                        props.getTabName('topics');
+                        window.scrollTo(0, 0);
                         //changeActiveTab(2)
                     }}
                     >

@@ -3,7 +3,6 @@ import './Article.scss'
 import Avatar from '../components/Avatar'
 import Tag from '../components/Tag'
 import FeatureCard from '../components/FeatureCard'
-import { Link } from 'react-router-dom'
 
 export default function Article(props) {
 
@@ -85,14 +84,14 @@ export default function Article(props) {
                 <p>{match && match.description}</p>
 
                 {/* closed icon */}
-                <Link to="/">
-                <div className="closed">
+                
+                <div className="closed cursor" onClick={props.history.goBack}>
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M0 2.90437L9.84652 12.7509L0 22.5974L2.90437 25.5372L12.7509 15.6907L22.5974 25.5372L25.5372 22.5974L15.6907 12.7509L25.5372 2.90437L22.5974 0L12.7509 9.84652L2.90437 0L0 2.90437Z" fill="#BDBDBD" />
                     </svg>
 
                 </div>
-                </Link>
+                
                 
 
 
@@ -149,27 +148,30 @@ export default function Article(props) {
                 <div className="related-box">
                     <h2>Related Posts</h2>
                     <FeatureCard
-                        cover="https://images.unsplash.com/photo-1565841424346-c2bf899b27bb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title="Title"
-                        designer="LStudio"
+                        cover="https://images.unsplash.com/photo-1556925159-d25835f7d37d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
+                        title="project mapping"
+                        designer="Raummaschine"
+                        topic="science"
+                        description="Eiusmod ad nulla reprehenderit quis sunt. Dolore qui in laborum sunt proident officia sunt duis incididunt ad eiusmod fugiat. Elit aliqua eu nisi exercitation officia. Esse amet labore sunt non do. Qui duis qui consectetur Lorem tempor cillum ut qui id consequat ex pariatur commodo. Sit in mollit sint quis mollit. Sunt velit esse sit exercitation consectetur laboris officia."
+                        id="at7d44h27X4"
+                    />
+
+                    <FeatureCard
+                        cover="https://images.unsplash.com/photo-1533144169699-97ec15a75e92?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
+                        title="crystal universe"
+                        designer="teamLab"
                         topic="Art & Culture"
-                        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam repellat, fuga tempore cumque iure delectus repellendus architecto nisi. Eveniet fuga dolores perferendis ducimus reiciendis quaerat maiores magni possimus voluptate earum."
+                        description="Lights at the ArtScience Museum Singapore"
+                        id="WNk-f-TnZDw"
                     />
 
                     <FeatureCard
                         cover="https://images.unsplash.com/photo-1565841424346-c2bf899b27bb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title="Title"
-                        designer="LStudio"
-                        topic="Art & Culture"
-                        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam repellat, fuga tempore cumque iure delectus repellendus architecto nisi. Eveniet fuga dolores perferendis ducimus reiciendis quaerat maiores magni possimus voluptate earum."
-                    />
-
-                    <FeatureCard
-                        cover="https://images.unsplash.com/photo-1565841424346-c2bf899b27bb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title="Title"
-                        designer="LStudio"
-                        topic="Art & Culture"
-                        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam repellat, fuga tempore cumque iure delectus repellendus architecto nisi. Eveniet fuga dolores perferendis ducimus reiciendis quaerat maiores magni possimus voluptate earum."
+                        title="touch"
+                        designer="Petey Cruiser"
+                        topic="daily life"
+                        description="Portland Festival of Lights"
+                        id="I4YsI1zWq_w"
                     />
                 </div>
             </div>

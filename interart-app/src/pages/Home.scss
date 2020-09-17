@@ -45,7 +45,6 @@
 }
 
 
-
 .search-bar{
     display:flex;
     margin-top: calc(30px + 1.2em);
@@ -61,6 +60,16 @@
         outline:none;
 
 }
+}
+a.to-all{
+    display: flex;
+    justify-content: center;
+    width:60%;
+    &:hover{
+        color:$secondary-bg;
+        background-color: $secondary-color;
+    }
+
 }
 
 .card-columns{

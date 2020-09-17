@@ -1,67 +1,88 @@
-import React from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import './Home.scss'
 import FeatureCard from '../components/FeatureCard'
 import PostCard from '../components/PostCard'
 import { LoremIpsum } from "lorem-ipsum";
 import CollectionCard from '../components/CollectionCard';
+import { Link } from 'react-router-dom';
+import GetPosts from '../components/GetPosts';
 
-function Home(props){
+function Home(props) {
+    const [page, setPage] = useState(1)
 
     const lorem = new LoremIpsum({
         sentencesPerParagraph: {
-          max: 8,
-          min: 4
+            max: 8,
+            min: 4
         },
         wordsPerSentence: {
-          max: 16,
-          min: 4
+            max: 16,
+            min: 4
         }
-      });
+    });
 
-      
-    console.log(props.data)
+
     let renderSource = [];
-    if(props.tab === "featured" && props.data){
-        for(let item of props.data.slice(0,4)){
-            const itemObj = {
-                title:item.title,
-                designer: item.designer,
-                topic: item.topic,
-                description: item.description,
-                cover:item.image.thumb,
-                id:item.id
-            }
-            
-            renderSource.push(itemObj)
-        };
-    }
-
-    if(props.tab === "designers" || props.tab === "topics"){
-        for(const key of Object.keys(props.data)){
-            let covers = [];
-            props.data[key].map(item=>covers.push(item.image.thumb))
-            if(key !== "unknown" && renderSource.length<4){
+    if (props.data) {
+        if (props.tab === "featured") {
+            for (let item of props.data) {
                 const itemObj = {
-                    title:key,
-                    designer:null,
-                    topic:null,
-                    description:lorem.generateParagraphs(1),
-                    cover:covers.slice(0,4),
-                    id:key
+                    title: item.title,
+                    designer: item.designer,
+                    topic: item.topic,
+                    description: item.description,
+                    cover: item.image.thumb,
+                    id: item.id
                 }
+
                 renderSource.push(itemObj)
+            };
+        }
+
+        if (props.tab === "designers" || props.tab === "topics") {
+            for (const key of Object.keys(props.data)) {
+                let covers = [];
+                props.data[key].map(item => covers.push(item.image.thumb))
+                if (key !== "unknown" && renderSource.length < 4) {
+                    const itemObj = {
+                        title: key,
+                        designer: null,
+                        topic: null,
+                        description: lorem.generateParagraphs(1),
+                        cover: covers.slice(0, 4),
+                        id: key
+                    }
+                    renderSource.push(itemObj)
+                }
+
             }
-            
         }
     }
 
-    return(
+    // posts in the right hand side
+    const { loading, posts, hasMore } = GetPosts(page);
+    const observer = useRef();
+    const lastPost = useCallback(last => {
+        if(loading) return;
+        if (observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver(
+            entries=>{
+                // when the last item is in somewhere on the page
+                if(entries[0].isIntersecting && hasMore){
+                    setPage(prevPage => prevPage +1)
+                
+                }})
+        if(last) observer.current.observe(last);
+    },[loading,hasMore]);
+
+
+    return (
         <div className="main-container home">
 
             <div className="feature-card-container">
-                
+
                 <div>
-                    <div><h3>Posts Pick For You</h3></div>
+                    <div><h3>{props.tab === "featured" ? "Posts Pick For You" : props.tab}</h3></div>
                     <button type="button">
                         <svg width="22px" height="22px" viewBox="0 0 16 16" className="bi bi-bell" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
@@ -69,38 +90,38 @@ function Home(props){
                         </svg>
                     </button>
                 </div>
-                
-            {props.tab ==="featured" ? renderSource.map(item=>(
-                <FeatureCard
-                    key = {Math.random()}
-                    cover={item.cover}
-                    title={item.title}
-                    designer={item.designer}
-                    topic={item.topic}
-                    description={item.description}
-                    id={item.id}
-                    
-                />)) : renderSource.map(item=>(
-                <CollectionCard
-                    key = {Math.random()}
-                    cover={item.cover}
-                    title={item.title}
-                    designer={item.designer}
-                    topic={item.topic}
-                    description={item.description}
-                    id={item.id}
-                    />
+
+                {props.tab === "featured" ? renderSource.map(item => (
+                    <FeatureCard
+                        key={Math.random()}
+                        cover={item.cover}
+                        title={item.title}
+                        designer={item.designer}
+                        topic={item.topic}
+                        description={item.description}
+                        id={item.id}
+
+                    />)) : renderSource.map(item => (
+                        <CollectionCard
+                            key={Math.random()}
+                            cover={item.cover}
+                            title={item.title}
+                            designer={item.designer}
+                            topic={item.topic}
+                            description={item.description}
+                            id={item.id}
+                        />
 
 
-                ))
+                    ))
 
 
-            }
-                
-                
+                }
 
-                <button type="button" className="expand-btn">View All Feature Posts</button>
-               
+
+
+                {props.tab !== "featured" && <Link to={'/all/' + props.tab} className="expand-btn to-all">View All {props.tab}</Link>}
+
             </div>
 
             <div className="search-container">
@@ -113,38 +134,45 @@ function Home(props){
                 </form>
 
                 <div className="card-columns">
-                    <PostCard 
-                        postImg="https://images.unsplash.com/photo-1593072188319-5006e116315e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
-                      <PostCard 
-                        postImg="https://images.unsplash.com/photo-1505299344687-ee45ad431f9b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
-                      <PostCard 
-                        postImg="https://images.unsplash.com/photo-1583075347180-4bcc34aab3af?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
-                      <PostCard 
-                        postImg="https://images.unsplash.com/photo-1584815012715-25cd6e05a3f2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0"
-                        title = "Louis Hot Naked"
-                        designer="Lstudio"
-                        topic = "art & culture"
-                        numLikes="317"
-                        numComments="201"
-                    />
+                    {posts.map((item, index) => {
+                        if (posts.length === index + 1) {
+                            return (  
+                                    <PostCard
+                                        ref={lastPost}
+                                        key={Math.random()}
+                                        postImg={item.image.small}
+                                        title={item.title}
+                                        designer={item.designer}
+                                        topic={item.topic}
+                                        numLikes={item.likes}
+                                        numComments={Math.floor(item.likes * Math.random())}
+                                        author={item.author}
+                                        avatar={item.avatar}
+                                        tags={item.tags}
+                                        id={item.id}
+                                    />
+                            
+                            )
+
+                        } else {
+                            return (
+                                    <PostCard
+                                        postImg={item.image.small}
+                                        key={Math.random()}
+                                        title={item.title}
+                                        designer={item.designer}
+                                        topic={item.topic}
+                                        numLikes={item.likes}
+                                        numComments={Math.floor(item.likes * Math.random())}
+                                        author={item.author}
+                                        avatar={item.avatar}
+                                        tags={item.tags}
+                                        id={item.id}
+                                    />
+                                )
+
+                        }
+                    })}
                 </div>
             </div>
         </div>

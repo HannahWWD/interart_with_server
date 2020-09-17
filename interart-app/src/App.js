@@ -16,7 +16,7 @@ import MyPosts from './pages/MyPosts';
 
 function App(){
   
-  const[data,setData] = useState([])
+  const[data,setData] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,12 +65,12 @@ function App(){
         <Navbar />
         <ResetScroll />
        
-        <Route exact path="/" render={()=>(<Home data={data[tab]} tab={tab} />)}/> 
+        <Route exact path="/" render={()=>(data && <Home data={data[tab]} tab={tab} />)}/> 
         <Route path="/article/:id" component={Article}/> 
-        <Route path="/all" component={All}/>
+        <Route path="/all/:type" render={(props)=>(data && <All data={data[tab]} browserProps={props}/>)}/>
         <Route path="/new-post" component={NewPost}/>
         <Route path="/archive" component={MyArchive}/>
-        <Route path="/collection/:name" render={(props)=>(<Collection data={data[tab]} browserProps={props}/>)}/> 
+        <Route path="/collection/:name" render={(props)=>(data && <Collection data={data[tab]} browserProps={props}/>)}/> 
         <Route path="/my-posts" component={MyPosts}/>
       
 
