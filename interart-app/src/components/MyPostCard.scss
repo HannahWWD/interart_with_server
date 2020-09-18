@@ -1,8 +1,10 @@
 @import '../components/base.scss';
 
 .my-post-card-container{
+    display: grid;
     box-sizing: border-box;
     background-color: $secondary-bg;
+    height:400px;
         padding:1em;
         img{
             width:100%;
@@ -25,7 +27,11 @@
             padding:0.3em 4em;
             color:$secondary-text;
             border: 1px solid $secondary-text;
+            display:flex;
+            align-self: flex-end;
         }
+        
+        
 
     
 }

@@ -12,14 +12,22 @@
     -moz-transition: 0.3s;
     -ms-transition: 0.3s;
     -o-transition: 0.3s;
+    height: 64px;
+    display:grid;
+    
 }
 
 .inner-container{
-        padding:1em 3em;
+        padding:0 3em;
         display: flex;
-        align-items:flex-end;
+        align-items:center;
         justify-content: flex-end;
-       .nav-avatar{
+        .menu-container{
+            
+            position: relative;
+            display: flex;
+            align-items: center;
+            &>div:first-child{
                 border: 2px solid $secondary-color;
                 margin-right: 2em;
                 width:38px;
@@ -32,7 +40,44 @@
                 -moz-border-radius: 20px;
                 -ms-border-radius: 20px;
                 -o-border-radius: 20px;
+                cursor: pointer;
+            }
+            &>div:last-child{
+                box-shadow: 4px 5px 6px rgba($color: #000000, $alpha: 0.6);
+                position: absolute;
+                //visibility: hidden;
+                top:45px;
+                width:150px;
+                padding:1em;
+                text-align: left;
+                line-height: 2em;
+                background-color: $secondary-bg;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -o-border-radius: 5px;
+                a:hover{
+                    color:$secondary-color;
+                }
+                button{
+                    outline: none;
+                    background-color: $light-bg;
+                    border: none;
+                    border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    -ms-border-radius: 5px;
+                    -o-border-radius: 5px;
+                    width:100%;
+                    margin-top: 0.5em;
+                    color:$secondary-text;
 }
+
+            }
+
+        }
+      
 
     form{
         // margin-bottom: 0.2em;

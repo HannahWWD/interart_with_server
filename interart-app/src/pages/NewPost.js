@@ -1,26 +1,26 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import './NewPosts.scss'
 import { Link } from 'react-router-dom';
 
 export default function NewPost() {
 
-    const topics = ["art and culture", "human and nature", "technology", "science", "daily life", "society","other"]
+    const topics = ["art and culture", "human and nature", "technology", "science", "daily life", "society", "other"]
 
     const [input, setInput] = useState("");
     const [isClicked, setIsClicked] = useState(false)
 
-    function handleChange(event){
+    function handleChange(event) {
         let value = event.target.value;
-        if(value.length > 200){
-            value = value.slice(0,200)
-            
+        if (value.length > 200) {
+            value = value.slice(0, 200)
+
         }
         setInput(value);
-       
+
 
     }
 
-    function handleClicked(){
+    function handleClicked() {
         setIsClicked(true)
     }
 
@@ -35,43 +35,45 @@ export default function NewPost() {
             </div>
             <div className="new-post">
                 <div className="image-input">
-                    <img className={isClicked? null:"hidden"} src="https://images.unsplash.com/photo-1525595260765-82398f322ac3?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2NDA4MH0" alt="uploaded"></img>
+                    <img className={isClicked ? null : "hidden"} src="https://images.unsplash.com/photo-1495232714953-ef7f41577786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" alt="uploaded"></img>
                     <button type="button" id="add-image" onClick={handleClicked} className={isClicked && "hidden"}>+</button>
                 </div>
-                <form>
+                <form action="http://localhost:5000/api/my-posts" method="post">
+                    <input type="text" id="image" name="image" value="https://images.unsplash.com/photo-1495232714953-ef7f41577786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" className="hidden"></input>
+                    
                     <div className="form-group">
-                        <label className="small-text" for="f-title">Title (optional)</label>
-                        <input className="form-control" type="text" id="f-title" name="f-title"></input>
+                        <label className="small-text" for="title">Title</label>
+                        <input className="form-control" type="text" id="title" name="title" value="untitled"></input>
                     </div>
                     <div className="form-group">
-                        <label className="small-text" for="f-designer">Designer (optional)</label>
-                        <input className="form-control" type="text" id="f-designer" name="f-designer"></input>
+                        <label className="small-text" for="designer">Designer</label>
+                        <input className="form-control" type="text" id="designer" name="designer" value="unknown"></input>
                     </div>
                     <div className="form-group">
-                        <label className="small-text" for="f-topic">Topic</label>
-                        <select className="form-control" name="f-topic" id="f-topic">
+                        <label className="small-text" for="topic">Topic</label>
+                        <select className="form-control" name="topic" id="f-topic">
                             {topics.map(
                                 (topic) => <option value={topic}>{topic}</option>)}
                         </select>
                     </div>
                     <div className="form-group">
-                        <label className="small-text" for="f-tags">Tags (optional)</label>
-                        <input className="form-control" type="text" id="f-tags" name="f-tags"></input>
+                        <label className="small-text" for="tags">Tags (optional)</label>
+                        <input className="form-control" type="text" id="tags" name="tags" value="culture,texture"></input>
                     </div>
                     <div className="form-group">
-                        <label className="small-text" for="f-description">Description(optional, less than 200 characters)</label>
-                        <textarea 
-                        className="form-control" 
-                        type="text" 
-                        id="f-description" 
-                        name="f-description" 
-                        rows="4" 
-                        onChange={handleChange}
-                        value={input}>
+                        <label className="small-text" for="description">Description(optional, less than 200 characters)</label>
+                        <textarea
+                            className="form-control"
+                            type="text"
+                            id="description"
+                            name="description"
+                            rows="4"
+                            onChange={handleChange}
+                            value={input}>
                         </textarea>
-                        <p className="small-text counter">{200-input.length} characters left</p>
+                        <p className="small-text counter">{200 - input.length} characters left</p>
                     </div>
-                    <button type="submit" className="btn btn-primary btn-lg btn-block btn-big">Post</button>
+                    <button type="submit" className="btn btn-primary btn-lg btn-block btn-big" >Post</button>
 
 
                 </form>

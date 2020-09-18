@@ -3,10 +3,12 @@ import './Article.scss'
 import Avatar from '../components/Avatar'
 import Tag from '../components/Tag'
 import FeatureCard from '../components/FeatureCard'
+import Save from '../components/Save'
 
 export default function Article(props) {
 
-    const [match, setMatch] = useState(null)
+    const [match, setMatch] = useState(null);
+    const [isSaved,setIsSaved] = useState(false)
 
     useEffect(()=>{
         const postData = async (data) => {
@@ -32,8 +34,20 @@ export default function Article(props) {
         postData(props.match.params);
         
     },[props.match.params])
-    console.log(match)
 
+    useEffect(() => {
+        fetch('http://localhost:5000/api/save-post')
+        .then(response => response.json())
+        .then(data=>{
+            console.log(data.lists)
+            console.log(data.lists.includes(props.match.params.id))
+            setIsSaved(data.lists.includes(props.match.params.id))
+        })
+        .catch(error => {
+                console.log(error);
+
+            })
+    }, [props.match.params.id])
 
     return (
         <div className="main-container">
@@ -56,17 +70,15 @@ export default function Article(props) {
                 {/* social group */}
                 <div className="social-icons">
                     {/* like */}
-                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="23" height="22" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.55097 1.5126C6.6348 1.5126 7.66004 1.93613 8.42165 2.72269C8.45095 2.75294 8.48024 2.78319 8.50953 2.81345L9.56407 3.93277L10.6186 2.8437C11.3802 2.05714 12.4055 1.60336 13.4893 1.60336C14.5731 1.60336 15.5984 2.05714 16.3893 2.8437C17.9711 4.47731 17.9711 7.16975 16.3893 8.80336L9.56407 15.8521L3.76411 9.86218L3.79341 9.83193L2.70957 8.77311C2.68028 8.74286 2.65099 8.7126 2.6217 8.68235C1.86009 7.8958 1.44999 6.83697 1.44999 5.71765C1.44999 4.59832 1.88938 3.5395 2.65099 2.72269C3.4126 1.93613 4.43784 1.5126 5.55097 1.5126ZM5.55097 0C4.11562 0 2.70958 0.57479 1.62575 1.69412C-0.541915 3.93277 -0.541915 7.56303 1.62575 9.80168C1.65504 9.83193 1.68433 9.86218 1.71362 9.89244L9.56407 18L17.3852 9.89244C19.5529 7.65378 19.5236 4.02353 17.3852 1.78487C16.3014 0.665547 14.8953 0.0907566 13.46 0.0907566C12.0539 0.0907566 10.6186 0.635294 9.53478 1.75462C9.50548 1.72437 9.47619 1.69412 9.4469 1.66387C8.39236 0.544538 6.95702 0 5.55097 0Z" fill="#FF0266" />
                     </svg>
 
                     {/* save */}
-                    <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.89162 14.0542L7.5 13.8145L7.10838 14.0542L0.75 17.9471V0.75H14.25V17.9471L7.89162 14.0542Z" stroke="#FF0266" strokeWidth="1.5" />
-                    </svg>
+                    <Save id={props.match.params.id} saved={isSaved}/>
 
                     {/* share */}
-                    <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="22" height="23" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.972 18H2.028C1.46133 18 1 17.5105 1 16.9078V2.09225C1 1.49017 1.46133 1 2.028 1H7V1.70833H2.028C1.82867 1.70833 1.66667 1.88046 1.66667 2.09225V16.9078C1.66667 17.1195 1.82867 17.2917 2.028 17.2917H15.972C16.1713 17.2917 16.3333 17.1195 16.3333 16.9078V11.625H17V16.9078C17 17.5105 16.5393 18 15.972 18Z" fill="#FF0266" />
                         <path d="M7.66667 11.4175L7.19533 10.9167L16.4307 1.10342L17 1.35417V7.63283H16.3333V2.20912L7.66667 11.4175Z" fill="#FF0266" />
                         <path d="M17 1H10.758V1.70833H17V1Z" fill="#FF0266" />
@@ -97,7 +109,7 @@ export default function Article(props) {
 
             </article>
 
-            <div className="comment-related">
+            <div className="comment-related" id="comment">
                 <div>
                     <Avatar 
                         avatar={require('../images/avatar.jpg')}

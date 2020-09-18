@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 import './Home.scss'
 import FeatureCard from '../components/FeatureCard'
 import PostCard from '../components/PostCard'
@@ -7,8 +7,9 @@ import CollectionCard from '../components/CollectionCard';
 import { Link } from 'react-router-dom';
 import GetPosts from '../components/GetPosts';
 
-function Home(props) {
-    const [page, setPage] = useState(1)
+const Home = (props) => {
+    const [page, setPage] = useState(1);
+    const [archivedArticles,setArchivedArticles] = useState(null)
 
     const lorem = new LoremIpsum({
         sentencesPerParagraph: {
@@ -75,6 +76,17 @@ function Home(props) {
         if(last) observer.current.observe(last);
     },[loading,hasMore]);
 
+    useEffect(() => {
+        fetch('http://localhost:5000/api/save-post')
+        .then(response => response.json())
+        .then(data=>{
+            setArchivedArticles(data.lists)
+        })
+        .catch(error => {
+                console.log(error);
+
+            })
+    }, [])
 
     return (
         <div className="main-container home">
@@ -150,6 +162,7 @@ function Home(props) {
                                         avatar={item.avatar}
                                         tags={item.tags}
                                         id={item.id}
+                                        saved={archivedArticles && archivedArticles.includes(item.id)}
                                     />
                             
                             )
@@ -168,6 +181,7 @@ function Home(props) {
                                         avatar={item.avatar}
                                         tags={item.tags}
                                         id={item.id}
+                                        saved={archivedArticles && archivedArticles.includes(item.id)}
                                     />
                                 )
 

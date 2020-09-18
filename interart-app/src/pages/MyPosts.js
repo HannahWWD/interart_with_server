@@ -1,9 +1,22 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import './MyPosts.scss'
 import MyPostCard from '../components/MyPostCard'
 import { Link } from 'react-router-dom'
 
 export default function MyPosts() {
+    const [newPosts, setNewPosts] = useState(null)
+    useEffect(() => {
+        fetch('http://localhost:5000/api/my-posts')
+        .then(response => response.json())
+        .then(data=>{
+            setNewPosts(data.myPosts)
+        })
+        .catch(error => {
+                console.log(error);
+
+            })
+    }, [])
+
     return (
         <div className="main-container">
             <div className="page-head">
@@ -21,7 +34,15 @@ export default function MyPosts() {
                     </Link> 
                 </div>
 
-                <MyPostCard />
+                {newPosts && newPosts.map(post=>(<MyPostCard 
+                    title={post.title}
+                    designer={post.designer}
+                    image={post.image.regular}
+                    description={post.description}
+                    tags={post.tags}
+                    topic={post.topic}
+                    key={Math.random()}
+                />))}
 
 
             </div>
