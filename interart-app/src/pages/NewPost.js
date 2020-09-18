@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './NewPosts.scss'
 import { Link } from 'react-router-dom';
+import {useForm} from 'react-hook-form'
 
 export default function NewPost() {
 
@@ -8,9 +9,12 @@ export default function NewPost() {
 
     const [input, setInput] = useState("");
     const [isClicked, setIsClicked] = useState(false)
+    const {register} = useForm();
+
 
     function handleChange(event) {
         let value = event.target.value;
+        
         if (value.length > 200) {
             value = value.slice(0, 200)
 
@@ -36,38 +40,39 @@ export default function NewPost() {
             <div className="new-post">
                 <div className="image-input">
                     <img className={isClicked ? null : "hidden"} src="https://images.unsplash.com/photo-1495232714953-ef7f41577786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" alt="uploaded"></img>
-                    <button type="button" id="add-image" onClick={handleClicked} className={isClicked && "hidden"}>+</button>
+                    <button type="button" id="add-image" onClick={handleClicked} className={isClicked ? "hidden" : null}>+</button>
                 </div>
                 <form action="http://localhost:5000/api/my-posts" method="post">
-                    <input type="text" id="image" name="image" value="https://images.unsplash.com/photo-1495232714953-ef7f41577786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" className="hidden"></input>
+                    <input type="text" id="image" name="image" ref={register} defaultValue="https://images.unsplash.com/photo-1495232714953-ef7f41577786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" className="hidden"></input>
                     
                     <div className="form-group">
-                        <label className="small-text" for="title">Title</label>
-                        <input className="form-control" type="text" id="title" name="title" value="untitled"></input>
+                        <label className="small-text" htmlFor="title">Title</label>
+                        <input className="form-control" type="text" id="title" name="title"  ref={register} defaultValue="untitled"></input>
                     </div>
                     <div className="form-group">
-                        <label className="small-text" for="designer">Designer</label>
-                        <input className="form-control" type="text" id="designer" name="designer" value="unknown"></input>
+                        <label className="small-text" htmlFor="designer">Designer</label>
+                        <input className="form-control" type="text" id="designer" name="designer" ref={register} defaultValue="unknown"></input>
                     </div>
                     <div className="form-group">
-                        <label className="small-text" for="topic">Topic</label>
-                        <select className="form-control" name="topic" id="f-topic">
+                        <label className="small-text" htmlFor="topic">Topic</label>
+                        <select className="form-control" name="topic"  ref={register} id="f-topic">
                             {topics.map(
-                                (topic) => <option value={topic}>{topic}</option>)}
+                                (topic) => <option key={Math.random()} value={topic}>{topic}</option>)}
                         </select>
                     </div>
                     <div className="form-group">
-                        <label className="small-text" for="tags">Tags (optional)</label>
-                        <input className="form-control" type="text" id="tags" name="tags" value="culture,texture"></input>
+                        <label className="small-text" htmlFor="tags">Tags (optional)</label>
+                        <input className="form-control" type="text" id="tags" name="tags"  ref={register} defaultValue="culture,texture"></input>
                     </div>
                     <div className="form-group">
-                        <label className="small-text" for="description">Description(optional, less than 200 characters)</label>
+                        <label className="small-text" htmlFor="description">Description(optional, less than 200 characters)</label>
                         <textarea
                             className="form-control"
                             type="text"
                             id="description"
                             name="description"
                             rows="4"
+                            ref={register} 
                             onChange={handleChange}
                             value={input}>
                         </textarea>

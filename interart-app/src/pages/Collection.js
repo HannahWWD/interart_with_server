@@ -64,7 +64,7 @@ export default function Collection(props) {
                     {props.data && props.data[matchedName].slice(0, 4).map(item => {
                         const image = item.image.small;
 
-                        return (<Link to={"/article/"+item.id} key={Math.random()}><div className="square" style={{ backgroundImage: `url(${image})` }}>
+                        return (<Link to={"/article/" + item.id} key={Math.random()}><div className="square" style={{ backgroundImage: `url(${image})` }}>
                         </div></Link>)
 
                     })}
@@ -88,6 +88,7 @@ export default function Collection(props) {
                             author={item.author}
                             avatar={item.avatar}
                             tags={item.tags}
+                            description={item.description}
                             id={item.id}
                         />
                         )

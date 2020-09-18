@@ -163,6 +163,7 @@ const Home = (props) => {
                                         tags={item.tags}
                                         id={item.id}
                                         saved={archivedArticles && archivedArticles.includes(item.id)}
+                                        description={item.description}
                                     />
                             
                             )
@@ -182,6 +183,7 @@ const Home = (props) => {
                                         tags={item.tags}
                                         id={item.id}
                                         saved={archivedArticles && archivedArticles.includes(item.id)}
+                                        description={item.description}
                                     />
                                 )
 

@@ -5,7 +5,7 @@
     grid-template-rows:1fr 5fr;
     background:$secondary-bg;
     width:153px;
-    height:100vh;
+    height:100%;
     position: fixed;
     box-sizing: border-box;
     padding:5em 0 8em 0;
@@ -55,4 +55,11 @@
     p{
         color:$secondary-color;
     }
+}
+
+@media only screen and (max-width:768px){
+    .sidebar{
+        display:none;
+    }
+
 }

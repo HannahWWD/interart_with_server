@@ -27,21 +27,6 @@
             position: relative;
             display: flex;
             align-items: center;
-            &>div:first-child{
-                border: 2px solid $secondary-color;
-                margin-right: 2em;
-                width:38px;
-                height:38px;
-                border-radius: 20px;
-                background-image: url('../images/avatar.jpg');
-                background-size: cover;
-                background-position: center;
-                -webkit-border-radius: 20px;
-                -moz-border-radius: 20px;
-                -ms-border-radius: 20px;
-                -o-border-radius: 20px;
-                cursor: pointer;
-            }
             &>div:last-child{
                 box-shadow: 4px 5px 6px rgba($color: #000000, $alpha: 0.6);
                 position: absolute;
@@ -102,4 +87,11 @@
 
 .nav-scrolled{
     background-color: rgba($color: #000000, $alpha: 0.9);
+}
+
+@media only screen and (max-width:768px){
+    .navbar-customized{
+        display: none;
+    }
+
 }

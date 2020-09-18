@@ -39,8 +39,6 @@ export default function Article(props) {
         fetch('http://localhost:5000/api/save-post')
         .then(response => response.json())
         .then(data=>{
-            console.log(data.lists)
-            console.log(data.lists.includes(props.match.params.id))
             setIsSaved(data.lists.includes(props.match.params.id))
         })
         .catch(error => {

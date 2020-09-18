@@ -6,7 +6,7 @@ function Navbar() {
 
     const [isScrolled, setIsScroll] = useState(false);
     const [isClicked,setIsClicked] = useState(false);
-
+    
     function changeBackground(){
         if(window.scrollY>200){
             setIsScroll(true);
@@ -41,7 +41,7 @@ function Navbar() {
         </form>
             
             <div className="menu-container">
-                <div onClick={toggleMenu}></div>
+                <div onClick={toggleMenu} className="nav-avatar"></div>
                 <div style={!isClicked? menuVis:null}>
                     <Link to="/my-posts">My Posts</Link>
                     <Link to="/archive">My Archives</Link>

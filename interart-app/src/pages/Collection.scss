@@ -19,11 +19,15 @@
 .collection-feature-container{
     margin:3em 0;
    
-    div{
+    &>div{
         margin-top: 1.5em;
         display: grid;
         grid-template-columns: repeat(4,1fr);
-        column-gap: 2em;
+        gap: 2em;
+       
+        div{
+        box-shadow: 4px 5px 6px rgba($color: #000000, $alpha: 0.6);
+       }
         
     }
     
@@ -38,3 +42,34 @@
 }
 
 
+
+
+@media only screen and (max-width:1200px){
+    .collection-head{
+        grid-template-columns: 1fr;
+    }
+    .collection-feature-container{
+        div{
+            grid-template-columns: repeat(2,1fr);
+        }
+    }
+
+    .all-collection{
+        .card-columns{
+            column-count: 2;
+        }
+    
+    }
+}
+
+@media only screen and (max-width:768px){
+
+    .all-collection{
+        .card-columns{
+            column-count: 1;
+        }
+    
+    }
+   
+
+}

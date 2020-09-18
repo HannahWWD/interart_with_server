@@ -9,6 +9,7 @@ export default function MyArchive(props) {
         fetch('http://localhost:5000/api/save-post')
         .then(response => response.json())
         .then(data=>{
+            console.log(data.articles)
             setFoundArticles(data.articles)
         })
         .catch(error => {
@@ -41,6 +42,7 @@ export default function MyArchive(props) {
                         avatar={article.avatar}
                         tags={article.tags}
                         id={article.id}
+                        description={article.description}
                         type="archive"
                     />
 

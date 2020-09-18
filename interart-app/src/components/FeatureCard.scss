@@ -33,3 +33,24 @@
 a{
     display:block;
 }
+
+
+@media only screen and (max-width:1200px){
+    .card-customized{
+        grid-template-columns:1fr 2fr;
+        height:220px;
+        .card-img{
+            height:100%;
+            object-fit: cover;
+        }
+    }
+    
+}
+
+@media only screen and (max-width:768px){
+    .card-customized{
+        height:160px;
+        
+    }
+
+}

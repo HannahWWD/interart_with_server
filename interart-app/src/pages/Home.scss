@@ -65,6 +65,7 @@ a.to-all{
     display: flex;
     justify-content: center;
     width:60%;
+    text-transform: capitalize;
     &:hover{
         color:$secondary-bg;
         background-color: $secondary-color;
@@ -74,9 +75,39 @@ a.to-all{
 
 .card-columns{
     margin-top: 3em;
-    display:inline-block;
+    // display:inline-block;
     column-count: 2;
     .card{
         margin-bottom: 1.25rem;
     }
+}
+
+
+
+@media only screen and (max-width:1200px){
+    .card-columns{
+        column-count: 1;
+    }
+    a.to-all{
+        
+        width:100%;
+        
+    
+    }
+
+}
+
+@media only screen and (max-width:768px){
+    .home{
+        grid-template-columns: 1fr;
+        padding:2em 0;
+    }
+    .feature-card-container{
+        display:none;
+    }
+
+    .search-bar{
+        display: none;
+    }
+
 }

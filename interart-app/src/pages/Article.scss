@@ -146,4 +146,9 @@
 
 }
 
+@media only screen and (max-width:1200px){
+    .comment-related{
+        grid-template-columns: 1fr;
+    }
+}
 

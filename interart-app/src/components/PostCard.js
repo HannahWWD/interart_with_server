@@ -33,8 +33,8 @@ const PostCard = forwardRef((props,ref) => {
                
             </div>
 
-            <div className={props.type === "mobile" ? "post-description" : "hidden"}>
-            <p className="small-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit vel amet vero labore atque quia excepturi quaerat itaque dignissimos! Velit distinctio maiores assumenda accusamus nihil iusto minima esse ea doloremque?</p>
+            <div className= "post-description">
+            <p className="small-text">{props.description.slice(0,200)}</p>
 
             </div>
 

@@ -12,6 +12,8 @@ import NewPost from './pages/NewPost';
 import MyArchive from './pages/MyArchive';
 import Collection from './pages/Collection';
 import MyPosts from './pages/MyPosts';
+import MobileNav from './components/MobileNav';
+import StickyBtn from './components/StickyBtn';
 
 
 function App(){
@@ -62,8 +64,10 @@ function App(){
     <div className="App">
      
       <BrowserRouter>
+        <MobileNav getTabName={getTabName} />
         <Sidebar getTabName={getTabName} activeTab={tab}/>
         <Navbar />
+        <StickyBtn />
         <ResetScroll />
        
         <Route exact path="/" render={()=>(data && <Home data={data[tab]} tab={tab} />)}/> 
