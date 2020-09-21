@@ -3,25 +3,24 @@ import './NewPosts.scss'
 import { Link } from 'react-router-dom';
 import {useForm} from 'react-hook-form'
 
-export default function NewPost() {
+export default function NewPost(props) {
 
     const topics = ["art and culture", "human and nature", "technology", "science", "daily life", "society", "other"]
 
     const [input, setInput] = useState("");
     const [isClicked, setIsClicked] = useState(false)
+    // react forms
     const {register} = useForm();
 
+    // if at the add new post page, set the active tab to featured
+    props.getTabName("featured")
 
     function handleChange(event) {
         let value = event.target.value;
-        
         if (value.length > 200) {
             value = value.slice(0, 200)
-
         }
         setInput(value);
-
-
     }
 
     function handleClicked() {

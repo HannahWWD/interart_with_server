@@ -39,7 +39,7 @@ export default function StickyBtn() {
                     </svg>
                 </div>
                 <form>
-                    <input type="text"></input>
+                    <input type="text" placeholder="mock search bar"></input>
                 </form>
 
             </div>

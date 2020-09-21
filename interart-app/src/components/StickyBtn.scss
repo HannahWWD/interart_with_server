@@ -6,13 +6,12 @@
     right:20px;
     bottom:10px;
     z-index: 20;
-    width:100%;
     &>div{
         box-shadow: 4px 4px 4px rgba(65, 1, 26, 0.4);
         height: 58px;
         width: 58px;
         margin-bottom: 1em;
-        background:$primary-color;
+        background:$secondary-color;
         border-radius: 50%;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
@@ -40,6 +39,7 @@
 
 @media only screen and (max-width:768px){
     .sticky-btn{
+        // width:100%;
         &>div{
             &:first-child{
                 display: none;
@@ -64,7 +64,7 @@
         &>div:last-child{
             justify-content: center;
             // padding-left: 2em;
-            width:80%;
+            width:300px;
             border-radius: 50px;
             -webkit-border-radius: 50px;
             -moz-border-radius: 50px;
@@ -81,6 +81,7 @@
                 border: none;
                 margin-left:1em;
                 border-bottom: 1px solid $secondary-bg;
+                color:$secondary-bg
             }
 }
         

@@ -5,6 +5,7 @@ import CollectionCard from '../components/CollectionCard';
 
 export default function All(props) {
     const renderSources = [];
+    // configure lorem generator
     const lorem = new LoremIpsum({
         sentencesPerParagraph: {
             max: 4,

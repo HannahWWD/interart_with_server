@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom'
 
 export default function MyPosts() {
     const [newPosts, setNewPosts] = useState(null)
+    // fetch all my posts from server
     useEffect(() => {
-        fetch('http://localhost:5000/api/my-posts')
+        fetch('/api/my-posts')
         .then(response => response.json())
         .then(data=>{
             setNewPosts(data.myPosts)
@@ -43,10 +44,7 @@ export default function MyPosts() {
                     topic={post.topic}
                     key={Math.random()}
                 />))}
-
-
             </div>
-            
         </div>
     )
 }

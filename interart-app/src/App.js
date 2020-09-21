@@ -14,16 +14,19 @@ import Collection from './pages/Collection';
 import MyPosts from './pages/MyPosts';
 import MobileNav from './components/MobileNav';
 import StickyBtn from './components/StickyBtn';
+import DevNote from './components/DevNote';
 
 
 function App(){
   
-  const[data,setData] = useState(null)
+  const[data,setData] = useState(null);
+  const [tab, setTab] = useState("featured");
 
+  // fetch collection data
   useEffect(() => {
     const fetchData = async () => {
       const request = await fetch(
-        'http://localhost:5000/api/collection',
+        '/api/collection',
       );
 
       try {
@@ -39,14 +42,13 @@ function App(){
     fetchData();
   }, []);
 
-  const [tab, setTab] = useState("featured");
 
- 
+ // get active tab from sidebar
   const getTabName = (tabName) => {
     setTab(tabName)
   }
 
-  // maintain state after page reload
+  // maintain active tab state after page reload
   useEffect(() => {
     setTab(localStorage.getItem('tabName')||
     "featured")
@@ -56,14 +58,12 @@ function App(){
     localStorage.setItem("tabName", tab)
   }, [tab])
 
-  // console.log(tab)
-
-  //console.log("app")
 
   return (
     <div className="App">
      
       <BrowserRouter>
+        <DevNote />
         <MobileNav getTabName={getTabName} />
         <Sidebar getTabName={getTabName} activeTab={tab}/>
         <Navbar />
@@ -73,7 +73,7 @@ function App(){
         <Route exact path="/" render={()=>(data && <Home data={data[tab]} tab={tab} />)}/> 
         <Route path="/article/:id" component={Article}/> 
         <Route path="/all/:type" render={(props)=>(data && <All data={data[tab]} browserProps={props}/>)}/>
-        <Route path="/new-post" component={NewPost}/>
+        <Route path="/new-post" render={()=>(<NewPost getTabName={getTabName} />)}/>
         <Route path="/archive" component={MyArchive}/>
         <Route path="/collection/:name" render={(props)=>(data && <Collection data={data[tab]} browserProps={props}/>)}/> 
         <Route path="/my-posts" component={MyPosts}/>

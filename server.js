@@ -20,16 +20,23 @@ app.use(cors());
 app.use(express.static(path.join(__dirname,'interart-app/build')));
 
 
-
+// collection data
 app.get('/api/collection', (req,res) => {
     res.send(collectionAPI);
     console.log('Sent Collection');
 });
 
-// posts for the home page
+// posts for the home page (right)
 app.post('/api/get-posts',(req,res)=>{
   const requestPage = req.body.page;
-  let newRes = {sendPosts:[...newPosts,...mockAPI].slice(4 * (requestPage -1), 4 * requestPage)}
+  const searchTerm = req.body.search;
+  let sendPosts = []
+  if(searchTerm === "teamlab"){
+    sendPosts =mockAPI.filter(post=>post.designer ==="teamLab")
+  }else{
+    sendPosts = [...newPosts,...mockAPI]
+  }
+  let newRes = {sendPosts:sendPosts.slice(4 * (requestPage -1), 4 * requestPage)}
   res.send(newRes)
   console.log("send post page: ", requestPage)
   // console.log("new responses is:",newRes)
@@ -46,7 +53,7 @@ app.post('/api/get-article',(req,res)=>{
   console.log("send article id:",dataFromApp)
 })
 
-// save archives
+// save archived posts
 app.post('/api/save-post',(req,res)=>{
   const newSaveReq = req.body;
   if(newSaveReq.isSaved && !archives.includes(newSaveReq.id)){
@@ -60,12 +67,14 @@ app.post('/api/save-post',(req,res)=>{
 
 })
 
+// get saved posts
 app.get('/api/save-post',(req,res)=>{
-  const foundArticles = mockAPI.filter(item=>archives.includes(item.id))
+  const foundArticles = [...newPosts,...mockAPI].filter(item=>archives.includes(item.id))
   res.send({lists:archives, articles:foundArticles})
   console.log("archived fetched",archives)
 })
 
+// post new posts
 app.post('/api/my-posts',(req,res)=>{
   const newPost = req.body;
   const completedInfo = {
@@ -88,21 +97,23 @@ app.post('/api/my-posts',(req,res)=>{
 
   }
   newPosts.push(completedInfo)
-  res.redirect("http://localhost:3000/")
+  res.redirect("/")
   console.log("new post saved")
 
 })
 
+// send all my posts
 app.get('/api/my-posts',(req,res)=>{
   res.send({myPosts:newPosts})
   console.log("all my posts send")
 })
 
+// take care of routes that does not existed
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname + '/interart-app/build/index.html'))
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(5000, function () {
+app.listen(process.env.PORT || 5000, function () {
   console.log('Example app listening on port 5000!');
 })

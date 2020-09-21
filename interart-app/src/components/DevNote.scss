@@ -1,0 +1,47 @@
+@import './base.scss';
+
+.dev-note{
+    display:grid;
+    background-color: $secondary-bg;
+    position: fixed;
+    width: 800px;
+    // this 50% is related to the window width and height
+    top:50%;
+    left:50%;
+    z-index: 100;
+    // this is 50% is related to the elem itself
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    padding:2em;
+    border: 3px dashed $secondary-color;
+    box-shadow: 8px 8px 10px $secondary-bg;
+    h2{
+        text-align: center;
+    }
+    p{
+        margin-top: 1em;
+        color:$secondary-text;
+    }
+    a{
+        display: inline;
+        text-decoration: underline;
+    }
+
+    button{
+        display:flex;
+        justify-self: center;
+        padding:0.5em 2em;
+        margin-top:2em;
+        font-size: 16px;
+    }
+
+}
+
+@media only screen and (max-width:1200px){
+    .dev-note{
+        display:none
+    };
+}

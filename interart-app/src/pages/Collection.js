@@ -9,17 +9,6 @@ import { Link } from 'react-router-dom'
 export default function Collection(props) {
 
     const matchedName = props.browserProps.match.params.name
-    console.log(props.browserProps)
-
-    //    if(props.data){
-    //        var matchedName = Object.keys(props.data).filter(
-    //            item=>{
-    //                return item === props.browserProps.match.params.name}
-    //         )
-    //         matchedName = matchedName[0]
-    //         console.log(matchedName)
-
-    //    }
 
     const lorem = new LoremIpsum({
         sentencesPerParagraph: {
@@ -68,9 +57,7 @@ export default function Collection(props) {
                         </div></Link>)
 
                     })}
-
                 </div>
-
             </div>
 
             <div className="all-collection">
@@ -92,13 +79,9 @@ export default function Collection(props) {
                             id={item.id}
                         />
                         )
-
                     )}
-
                 </div>
             </div>
-
-
         </div>
     )
 }

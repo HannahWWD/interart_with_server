@@ -1,16 +1,16 @@
 import {useEffect, useState} from 'react'
 
-export default function GetPosts(pageNumber) {
+export default function GetPosts(pageNumber,searchInput=null) {
     const [loading, setLoading] = useState(true);
     const [error,setError] = useState(false);
     const [posts,setPosts] = useState([]);
     const [hasMore,setHasMore] = useState(false);
 
     useEffect(()=>{
-        const query = {page:pageNumber}
+        const query = {page:pageNumber,search:searchInput}
         setLoading(true);
         setError(false)
-        fetch('http://localhost:5000/api/get-posts',{
+        fetch('/api/get-posts',{
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
@@ -19,9 +19,9 @@ export default function GetPosts(pageNumber) {
             body: JSON.stringify(query), // body data type must match "Content-Type" header        
         }).then(response=>response.json())
         .then(data=>{
-            const posts = data.sendPosts
-            setPosts(prev=>{return [...prev,...posts]})
-            setHasMore(posts[posts.length-1].id !== "VTDm03aGzl4")
+            const matchPosts= data.sendPosts
+            setPosts(prev=>pageNumber === 1? [...matchPosts] : [...prev,...matchPosts])
+            setHasMore(matchPosts.length !== 0)
             setLoading(false)
         }).catch(error=>{
             console.log(error);
@@ -29,7 +29,7 @@ export default function GetPosts(pageNumber) {
         })
     
 
-    },[pageNumber])
+    },[pageNumber,searchInput])
 
     return {loading,error,posts,hasMore}
 }

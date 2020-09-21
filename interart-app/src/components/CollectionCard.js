@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 function CollectionCard(props) {
+    // set character display limit
     const maxInfo = 30;
     const maxDescription = 60;
     let info = null;
@@ -15,13 +16,10 @@ function CollectionCard(props) {
         }
     }
     
-    
-
     let description = props.description;
     if(description.length>maxDescription){
         description = description.slice(0,maxDescription) + "..."
     }
-
     while(props.cover.length<4){
         props.cover.push(props.cover[0])
     }
