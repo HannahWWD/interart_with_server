@@ -5,10 +5,18 @@
         grid-template-rows: repeat(2,1fr);
         gap:5px;
         height: 10vw;
-        img{
-            width:100%;
-            height:100%;
-            object-fit: cover;
+        div{
+            display:flex;
+            overflow: hidden;
+            img{
+                width:100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            // width:100%;
+            // height:100%;
+          
+            
         }
     }
     

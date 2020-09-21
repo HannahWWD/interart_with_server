@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 export default function MyPosts() {
     const [newPosts, setNewPosts] = useState(null)
+    const [deletedPostId,setDeletedPostId] = useState(null)
     // fetch all my posts from server
     useEffect(() => {
         fetch('/api/my-posts')
@@ -17,6 +18,28 @@ export default function MyPosts() {
 
             })
     }, [])
+
+
+    // delete a new post in server side
+    const deletePost = (id)=>{
+        setDeletedPostId(id)
+    }
+   
+    useEffect(() => {
+        deletedPostId && fetch("/api/delete-post", {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: deletedPostId }), // body data type must match "Content-Type" header        
+        })
+            .then(res => res.json())
+            .then(data => {
+                setNewPosts(data.myPosts)
+            })
+            .catch(error => console.log(error))
+    }, [deletedPostId])
 
     return (
         <div className="main-container">
@@ -36,12 +59,14 @@ export default function MyPosts() {
                 </div>
 
                 {newPosts && newPosts.map(post=>(<MyPostCard 
+                    delete = {deletePost}
                     title={post.title}
                     designer={post.designer}
                     image={post.image.regular}
                     description={post.description}
                     tags={post.tags}
                     topic={post.topic}
+                    id={post.id}
                     key={Math.random()}
                 />))}
             </div>

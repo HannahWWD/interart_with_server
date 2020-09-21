@@ -29,7 +29,7 @@ function CollectionCard(props) {
             <Link to={"/collection/"+encodeURI(props.id)}>
             <div className="card-customized collection-card">
                     <div className="left">
-                        {props.cover.map(item=>(<img src={item} alt="cover" key={Math.random()}></img>))}
+                        {props.cover.map(item=>(<div key={Math.random()}><img src={item} alt="cover"></img></div>))}
                     </div>
 
                     <div className="right">

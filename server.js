@@ -4,7 +4,7 @@ const app = express()
 const uniqid = require('uniqid')
 const mockAPI = require('./mockAPI')
 const collectionAPI = require('./collectionAPI')
-const newPosts = [];
+let newPosts = [];
 let archives = [];
 
 // dependencies
@@ -106,6 +106,12 @@ app.post('/api/my-posts',(req,res)=>{
 app.get('/api/my-posts',(req,res)=>{
   res.send({myPosts:newPosts})
   console.log("all my posts send")
+})
+app.post('/api/delete-post',(req,res)=>{
+  const postShouldDel = req.body.id;
+  newPosts = newPosts.filter(post=>{post.id !== postShouldDel})
+  res.send({myPosts:newPosts})
+  console.log(postShouldDel,"has been deleted")
 })
 
 // take care of routes that does not existed

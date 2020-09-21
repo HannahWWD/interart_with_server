@@ -2,6 +2,7 @@ import React from 'react'
 import './MyPostCard.scss'
 
 export default function MyPostCard(props) {
+ 
     const option = new Intl.DateTimeFormat("en" , {
         timeStyle: "short",
         dateStyle: "short"
@@ -42,7 +43,9 @@ export default function MyPostCard(props) {
                     <p className="small-text">Description</p>
                     <p>{content}</p>
                 </div>
-                <button type="button" className="expand-btn">Delete</button>
+                <button type="button" className="expand-btn" onClick={()=>{
+                    props.delete(props.id)
+                }}>Delete</button>
 
             </div>
 

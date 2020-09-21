@@ -45,23 +45,7 @@
 }
 
 
-.search-bar{
-    display:flex;
-    margin-top: calc(30px + 1.2em);
-    background: $light-bg;
-    padding:1em;
-    input{
-        border: none;
-        width:100%;
-        background: none;
-        line-height: 1;
-        font-size: 1.125em;
-        padding-left: 1em;
-        outline:none;
-        color:$primary-text;
 
-}
-}
 a.to-all{
     display: flex;
     justify-content: center;

@@ -19,16 +19,16 @@ const LoremIpsum = require('lorem-ipsum').LoremIpsum;
 // const tags = ["art","human","nature","interactive","immersive","light","impressive","people","tech","sociality","culture","experimental","wellbeing","comforting","pattern","texture","emerging","delicate","wow"]
 // const topics = ["art and culture","human and nature","technology","science","daily life","society"]
 
-// const lorem = new LoremIpsum({
-//     sentencesPerParagraph: {
-//       max: 8,
-//       min: 4
-//     },
-//     wordsPerSentence: {
-//       max: 16,
-//       min: 4
-//     }
-//   });
+const lorem = new LoremIpsum({
+    sentencesPerParagraph: {
+      max: 4,
+      min: 2
+    },
+    wordsPerSentence: {
+      max: 10,
+      min: 4
+    }
+  });
 
 
 function randomNumber(min, max) {  
@@ -72,7 +72,7 @@ function randomNumber(min, max) {
 
 // fs.writeFileSync('mockAPI.json',JSON.stringify(mockAPI))
 
-const mockAPI = require('./mockAPI');
+//const mockAPI = require('./mockAPI');
 // const rawAPI = require('./rawAPI')
 
 // for(let i=0;i<mockAPI.length;i++){
@@ -81,20 +81,20 @@ const mockAPI = require('./mockAPI');
 // }
 
 // fs.writeFileSync('mockAPI_update.json',JSON.stringify(mockAPI))
-const collectionsAPI = {
-  designers:{},
-  topics:{},
-  featured:null}
+// const collectionsAPI = {
+//   designers:{},
+//   topics:{},
+//   featured:null}
 
 
-for(let item of mockAPI){
-  //designers
-  let designer = item.designer;
-  if(!collectionsAPI.designers[designer]){
-    collectionsAPI.designers[designer] = [item]
-  }else{
-    collectionsAPI.designers[designer].push(item)
-  }
+// for(let item of mockAPI){
+//   //designers
+//   let designer = item.designer;
+//   if(!collectionsAPI.designers[designer]){
+//     collectionsAPI.designers[designer] = [item]
+//   }else{
+//     collectionsAPI.designers[designer].push(item)
+//   }
 
   // let topic = item.topic;
   // if(!collectionsAPI.topics[topic]){
@@ -109,8 +109,14 @@ for(let item of mockAPI){
   
 
   
-}
+//}
 
 //console.log(collectionsAPI)
 
-fs.writeFileSync('collection1.json',JSON.stringify(collectionsAPI))
+const lorems = []
+
+while (lorems.length < 20){
+  lorems.push(lorem.generateParagraphs(1))
+}
+
+fs.writeFileSync('lorems.json',JSON.stringify(lorems))
