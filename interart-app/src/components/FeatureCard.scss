@@ -37,7 +37,7 @@ a{
 
 @media only screen and (max-width:1200px){
     .card-customized{
-        grid-template-columns:1fr 2fr;
+        grid-template-columns:20% auto;
         height:220px;
         .card-img{
             height:100%;

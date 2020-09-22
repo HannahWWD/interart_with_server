@@ -5,7 +5,7 @@
 This web app mockup creates an interactive multimedia art community for designers or art lovers. The current version allows users to
 - continuously get new posts through infinite scrolling
 - get access to all articles and collections which are dynamically 
-- generated through mock APIs on the server
+generated through mock APIs on the server
 - save posts and find them in archives
 - make new posts
 - delete posts

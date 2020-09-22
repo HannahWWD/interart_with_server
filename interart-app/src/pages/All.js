@@ -4,6 +4,7 @@ import { LoremIpsum } from "lorem-ipsum";
 import CollectionCard from '../components/CollectionCard';
 
 export default function All(props) {
+    let type = props.browserProps.match.params.type;
     const renderSources = [];
     // configure lorem generator
     const lorem = new LoremIpsum({
@@ -38,7 +39,7 @@ export default function All(props) {
 
     return (
         <div className="main-container">
-            <h2>all posts for you</h2>
+            <h2>All {type}</h2>
             <div className="post-container">
                 {props.data && renderSources.map(renderSource=>(
                     <CollectionCard

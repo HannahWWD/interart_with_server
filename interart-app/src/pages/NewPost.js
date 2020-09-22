@@ -41,7 +41,7 @@ export default function NewPost(props) {
                     <img className={isClicked ? null : "hidden"} src="https://images.unsplash.com/photo-1495232714953-ef7f41577786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" alt="uploaded"></img>
                     <button type="button" id="add-image" onClick={handleClicked} className={isClicked ? "hidden" : null}>+</button>
                 </div>
-                <form action="http://localhost:5000/api/my-posts" method="post">
+                <form action="/api/my-posts" method="post">
                     <input type="text" id="image" name="image" ref={register} defaultValue="https://images.unsplash.com/photo-1495232714953-ef7f41577786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" className="hidden"></input>
                     
                     <div className="form-group">
